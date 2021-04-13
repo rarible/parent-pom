@@ -81,6 +81,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -253,6 +257,33 @@
 					<version>3.2.0</version>
 					<configuration>
 						<overwrite>true</overwrite>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>pl.project13.maven</groupId>
+					<artifactId>git-commit-id-plugin</artifactId>
+					<version>4.0.4</version>
+					<executions>
+						<execution>
+							<id>get-the-git-infos</id>
+							<goals>
+								<goal>revision</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>validate-the-git-infos</id>
+							<goals>
+								<goal>validateRevision</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<failOnNoGitDirectory>false</failOnNoGitDirectory>
+						<generateGitPropertiesFile>true</generateGitPropertiesFile>
+						<includeOnlyProperties>
+							<includeOnlyProperty>git.commit.id</includeOnlyProperty>
+							<includeOnlyProperty>git.commit.time</includeOnlyProperty>
+						</includeOnlyProperties>
 					</configuration>
 				</plugin>
 			</plugins>
