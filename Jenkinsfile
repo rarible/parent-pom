@@ -13,7 +13,9 @@ pipeline {
     }
     stage('deploy') {
       steps {
-        sh 'mvn deploy'
+				withCredentials([usernamePassword(credentialsId: 'jenkins-rarible-ci', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN')]) {
+					sh 'mvn deploy'
+				}
       }
     }
   }
