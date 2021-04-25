@@ -227,7 +227,6 @@
 				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
-					<!--version>${spring-boot-plugin.version}</version-->
 					<executions>
 						<execution>
 							<goals>
@@ -238,7 +237,7 @@
 					<configuration>
 						<classifier>boot</classifier>
 						<finalName>${project.artifactId}</finalName>
-						<outputDirectory>target/${project.artifactId}/lib</outputDirectory>
+						<outputDirectory>target/boot</outputDirectory>
 					</configuration>
 				</plugin>
 				<plugin>
