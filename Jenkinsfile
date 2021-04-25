@@ -1,3 +1,5 @@
+@Library('shared-library') _
+
 pipeline {
   agent any
 
@@ -11,12 +13,6 @@ pipeline {
         sh 'mvn clean install'
       }
     }
-    stage('deploy') {
-      steps {
-				withCredentials([usernamePassword(credentialsId: 'jenkins-rarible-ci', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN')]) {
-					sh 'mvn deploy'
-				}
-      }
-    }
+    deployToMaven('jenkins-rarible-ci')
   }
 }
