@@ -13,6 +13,10 @@ pipeline {
         sh 'mvn clean install'
       }
     }
-    deployToMaven('jenkins-rarible-ci')
+    stage('deploy') {
+      steps {
+      	deployToMaven('jenkins-rarible-ci')
+      }
+    }
   }
 }
