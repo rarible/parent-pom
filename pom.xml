@@ -46,7 +46,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<scala.version>2.13.2</scala.version>
 		<scala.major.version>2.13</scala.major.version>
-		<scalether.version>1.0-SNAPSHOT</scalether.version>
+		<scalether.version>0.1.2</scalether.version>
 		<mockk.version>1.10.6</mockk.version>
 		<feign-reactor.version>2.0.31</feign-reactor.version>
 		<mongock.version>4.3.8</mongock.version>
