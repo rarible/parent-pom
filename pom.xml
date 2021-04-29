@@ -109,7 +109,7 @@
 				<plugin>
 					<groupId>io.daonomic.scalether</groupId>
 					<artifactId>scalether-maven-plugin</artifactId>
-					<version>${scalether.version}</version>
+					<version>1.0-SNAPSHOT</version>
 					<executions>
 						<execution>
 							<phase>generate-sources</phase>
