@@ -84,6 +84,8 @@
 						<configuration>
 							<sources>
 								<source>src/main/kotlin</source>
+								<source>target/generated-sources/openapi/src/main/kotlin</source>
+								<source>target/generated-sources/openapi/src/main/java</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -164,6 +166,12 @@
 							<goals>
 								<goal>compile</goal>
 							</goals>
+							<configuration>
+								<compileSourceRoots>
+									<compileSourceRoot>${basedir}/src/main/java</compileSourceRoot>
+									<compileSourceRoot>${basedir}/target/generated-sources/openapi/src/main/java</compileSourceRoot>
+								</compileSourceRoots>
+							</configuration>
 						</execution>
 						<execution>
 							<id>java-test-compile</id>
@@ -195,6 +203,7 @@
 									<sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
 									<sourceDir>${project.basedir}/src/main/java</sourceDir>
 									<sourceDir>${project.basedir}/target/generated-sources/openapi/src/main/kotlin</sourceDir>
+									<sourceDir>${project.basedir}/target/generated-sources/openapi/src/main/java</sourceDir>
 								</sourceDirs>
 							</configuration>
 						</execution>
