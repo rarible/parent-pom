@@ -64,7 +64,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<scala.version>2.13.2</scala.version>
 		<scala.major.version>2.13</scala.major.version>
-		<scalether.version>0.1.2</scalether.version>
+		<scalether.version>0.1.3</scalether.version>
 	</properties>
 
 	<build>
