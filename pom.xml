@@ -32,6 +32,10 @@
 			<name>Internal Snapshots</name>
 			<url>http://10.7.3.6:8081/nexus/content/repositories/snapshots</url>
 		</repository>
+		<repository>
+			<id>nexus-maven-public</id>
+			<url>http://10.7.3.6:8083/repository/maven-public/</url>
+		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
