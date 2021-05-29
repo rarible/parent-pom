@@ -15,7 +15,7 @@ pipeline {
     }
     stage('deploy') {
       steps {
-      	deployToMaven('jenkins-rarible-ci')
+      	deployToMaven('nexus-ci')
       }
     }
   }
