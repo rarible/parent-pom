@@ -173,6 +173,7 @@
 								<compileSourceRoots>
 									<compileSourceRoot>${basedir}/src/main/java</compileSourceRoot>
 									<compileSourceRoot>${basedir}/target/generated-sources/openapi/src/main/java</compileSourceRoot>
+									<compileSourceRoot>${basedir}/target/generated-sources/kapt/compile</compileSourceRoot>
 								</compileSourceRoots>
 							</configuration>
 						</execution>
@@ -209,7 +210,7 @@
 									<sourceDir>${project.basedir}/target/generated-sources/openapi/src/main/java</sourceDir>
 									<sourceDir>${project.basedir}/target/generated-sources/rarible/src/main/kotlin</sourceDir>
 									<sourceDir>${project.basedir}/target/generated-sources/rarible/src/main/java</sourceDir>
-									<sourceDir>${project.basedir}/target/generated-sources/kapt/compile</sourceDir>
+									<sourceDir>${project.basedir}/target/generated-sources/kaptKotlin/compile</sourceDir>
 								</sourceDirs>
 							</configuration>
 						</execution>
