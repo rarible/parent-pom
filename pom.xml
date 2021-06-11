@@ -40,9 +40,10 @@
 	</distributionManagement>
 
 	<properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
+		<java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <kotlin.compiler.jvmTarget>${java.version}</kotlin.compiler.jvmTarget>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<scala.version>2.13.2</scala.version>
 		<scala.major.version>2.13</scala.major.version>
@@ -192,7 +193,7 @@
 						<compilerPlugins>
 							<plugin>spring</plugin>
 						</compilerPlugins>
-						<jvmTarget>1.8</jvmTarget>
+						<jvmTarget>${kotlin.compiler.jvmTarget}</jvmTarget>
 					</configuration>
 					<executions>
 						<execution>
