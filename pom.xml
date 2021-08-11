@@ -33,9 +33,8 @@
 
 	<distributionManagement>
 		<repository>
-			<id>github</id>
-			<name>GitHub Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/rariblecom/parent-pom</url>
+			<id>nexus-snapshots</id>
+			<url>http://nexus.rarible.int/repository/maven-snapshots/</url>
 		</repository>
 	</distributionManagement>
 
