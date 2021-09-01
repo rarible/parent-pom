@@ -52,6 +52,7 @@
 		<mongock.version>4.3.8</mongock.version>
 		<spring-cloud.version>Hoxton.SR9</spring-cloud.version>
 		<jacoco.version>0.8.7</jacoco.version>
+		<flattern.version>1.2.7</flattern.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
 	</properties>
 
@@ -372,6 +373,31 @@
 							<includeOnlyProperty>git.commit.time</includeOnlyProperty>
 						</includeOnlyProperties>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>${flattern.version}</version>
+					<configuration>
+						<updatePomFile>true</updatePomFile>
+						<flattenMode>resolveCiFriendliesOnly</flattenMode>
+					</configuration>
+					<executions>
+						<execution>
+							<id>flatten</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>flatten</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>flatten.clean</id>
+							<phase>clean</phase>
+							<goals>
+								<goal>clean</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
