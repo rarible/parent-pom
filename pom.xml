@@ -52,7 +52,7 @@
 		<mongock.version>4.3.8</mongock.version>
 		<spring-cloud.version>Hoxton.SR9</spring-cloud.version>
 		<jacoco.version>0.8.7</jacoco.version>
-		<flattern.version>1.2.7</flattern.version>
+		<flatten.version>1.2.7</flatten.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
 	</properties>
 
@@ -377,10 +377,11 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>flatten-maven-plugin</artifactId>
-					<version>${flattern.version}</version>
+					<version>${flatten.version}</version>
 					<configuration>
 						<updatePomFile>true</updatePomFile>
 						<flattenMode>resolveCiFriendliesOnly</flattenMode>
+						<outputDirectory>${project.basedir}/target</outputDirectory>
 					</configuration>
 					<executions>
 						<execution>
