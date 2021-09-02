@@ -381,7 +381,6 @@
 					<configuration>
 						<updatePomFile>true</updatePomFile>
 						<flattenMode>resolveCiFriendliesOnly</flattenMode>
-						<outputDirectory>${project.basedir}/target</outputDirectory>
 					</configuration>
 					<executions>
 						<execution>
