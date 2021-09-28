@@ -8,25 +8,25 @@
 	<groupId>com.rarible</groupId>
 	<artifactId>rarible-parent-pom</artifactId>
 	<packaging>pom</packaging>
-	<version>1.3-SNAPSHOT.spring25</version>
+	<version>1.3-spring25-SNAPSHOT</version>
     
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.5.2</version>
+        <version>2.5.5</version>
     </parent>
 
 	<repositories>
 		<repository>
-			<id>nexus</id>
-			<name>nexus</name>
+			<id>nexus-maven-public</id>
+			<name>nexus-maven-public</name>
 			<url>http://nexus.rarible.int/repository/maven-public/</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>nexus</id>
-			<name>nexus</name>
+			<id>nexus-maven-public</id>
+			<name>nexus-maven-public</name>
 			<url>http://nexus.rarible.int/repository/maven-public/</url>
 		</pluginRepository>
 	</pluginRepositories>
@@ -43,13 +43,21 @@
 	</distributionManagement>
 
 	<properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <kotlin.compiler.jvmTarget>${java.version}</kotlin.compiler.jvmTarget>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<scala.version>2.13.2</scala.version>
 		<scala.major.version>2.13</scala.major.version>
-		<scalether.version>1.1-SNAPSHOT</scalether.version>
+		<scalether.version>0.1.3</scalether.version>
+		<mockk.version>1.10.6</mockk.version>
+		<feign-reactor.version>2.0.31</feign-reactor.version>
+		<mongock.version>4.3.8</mongock.version>
+		<spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+		<jacoco.version>0.8.7</jacoco.version>
+		<flatten.version>1.2.7</flatten.version>
+		<mapstruct.version>1.4.2.Final</mapstruct.version>
 	</properties>
 
 	<build>
@@ -83,6 +91,8 @@
 						<configuration>
 							<sources>
 								<source>src/main/kotlin</source>
+								<source>target/generated-sources/openapi/src/main/kotlin</source>
+								<source>target/generated-sources/openapi/src/main/java</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -92,9 +102,26 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+					<groupId>org.openapitools</groupId>
+					<artifactId>openapi-generator-maven-plugin</artifactId>
+					<version>5.1.0</version>
+					<dependencies>
+						<dependency>
+							<groupId>com.rarible.codegen</groupId>
+							<artifactId>rarible-server-openapi-generator</artifactId>
+							<version>1.0-SNAPSHOT</version>
+						</dependency>
+						<dependency>
+							<groupId>com.rarible.codegen</groupId>
+							<artifactId>rarible-client-openapi-generator</artifactId>
+							<version>1.0.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
 					<groupId>io.daonomic.scalether</groupId>
 					<artifactId>scalether-maven-plugin</artifactId>
-					<version>1.0-SNAPSHOT</version>
+					<version>${scalether.version}</version>
 					<executions>
 						<execution>
 							<phase>generate-sources</phase>
@@ -146,6 +173,13 @@
 							<goals>
 								<goal>compile</goal>
 							</goals>
+							<configuration>
+								<compileSourceRoots>
+									<compileSourceRoot>${basedir}/src/main/java</compileSourceRoot>
+									<compileSourceRoot>${basedir}/target/generated-sources/openapi/src/main/java</compileSourceRoot>
+									<compileSourceRoot>${basedir}/target/generated-sources/kapt/compile</compileSourceRoot>
+								</compileSourceRoots>
+							</configuration>
 						</execution>
 						<execution>
 							<id>java-test-compile</id>
@@ -164,7 +198,7 @@
 						<compilerPlugins>
 							<plugin>spring</plugin>
 						</compilerPlugins>
-						<jvmTarget>1.8</jvmTarget>
+						<jvmTarget>${kotlin.compiler.jvmTarget}</jvmTarget>
 					</configuration>
 					<executions>
 						<execution>
@@ -176,6 +210,11 @@
 								<sourceDirs>
 									<sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
 									<sourceDir>${project.basedir}/src/main/java</sourceDir>
+									<sourceDir>${project.basedir}/target/generated-sources/openapi/src/main/kotlin</sourceDir>
+									<sourceDir>${project.basedir}/target/generated-sources/openapi/src/main/java</sourceDir>
+									<sourceDir>${project.basedir}/target/generated-sources/rarible/src/main/kotlin</sourceDir>
+									<sourceDir>${project.basedir}/target/generated-sources/rarible/src/main/java</sourceDir>
+									<sourceDir>${project.basedir}/target/generated-sources/kaptKotlin/compile</sourceDir>
 								</sourceDirs>
 							</configuration>
 						</execution>
@@ -191,6 +230,25 @@
 								</sourceDirs>
 							</configuration>
 						</execution>
+						<execution>
+							<id>kapt</id>
+							<goals>
+								<goal>kapt</goal>
+							</goals>
+							<configuration>
+								<sourceDirs>
+									<sourceDir>src/main/kotlin</sourceDir>
+									<sourceDir>src/main/java</sourceDir>
+								</sourceDirs>
+								<annotationProcessorPaths>
+									<annotationProcessorPath>
+										<groupId>org.mapstruct</groupId>
+										<artifactId>mapstruct-processor</artifactId>
+										<version>${mapstruct.version}</version>
+									</annotationProcessorPath>
+								</annotationProcessorPaths>
+							</configuration>
+						</execution>
 					</executions>
 					<dependencies>
 						<dependency>
@@ -203,6 +261,38 @@
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.22.2</version>
+					<configuration>
+						<trimStackTrace>false</trimStackTrace>
+						<includes>
+							<include>**/*Test.*</include>
+							<include>**/*It.*</include>
+							<include>**/*Ft.*</include>
+						</includes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco.version}</version>
+					<configuration>
+						<excludes>
+							<exclude>**/*Exception.*</exclude>
+						</excludes>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>report</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<artifactId>maven-assembly-plugin</artifactId>
@@ -226,7 +316,6 @@
 				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
-					<!--version>${spring-boot-plugin.version}</version-->
 					<executions>
 						<execution>
 							<goals>
@@ -237,7 +326,7 @@
 					<configuration>
 						<classifier>boot</classifier>
 						<finalName>${project.artifactId}</finalName>
-						<outputDirectory>target/${project.artifactId}/lib</outputDirectory>
+						<outputDirectory>target/boot</outputDirectory>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -253,7 +342,7 @@
 							</goals>
 						</execution>
 					</executions>
-				</plugin>												
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
@@ -289,6 +378,31 @@
 						</includeOnlyProperties>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>${flatten.version}</version>
+					<configuration>
+						<updatePomFile>true</updatePomFile>
+						<flattenMode>resolveCiFriendliesOnly</flattenMode>
+					</configuration>
+					<executions>
+						<execution>
+							<id>flatten</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>flatten</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>flatten.clean</id>
+							<phase>clean</phase>
+							<goals>
+								<goal>clean</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -299,6 +413,24 @@
 				<groupId>org.scala-lang</groupId>
 				<artifactId>scala-library</artifactId>
 				<version>${scala.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>${mapstruct.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mockk</groupId>
+				<artifactId>mockk</artifactId>
+				<version>${mockk.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.github.cloudyrock.mongock</groupId>
+				<artifactId>mongock-bom</artifactId>
+				<version>${mongock.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -311,6 +443,14 @@
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-reflect</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
 		</dependency>
 	</dependencies>
 
