@@ -53,7 +53,6 @@
 		<spring-cloud.version>Hoxton.SR9</spring-cloud.version>
 		<jacoco.version>0.8.7</jacoco.version>
 		<flatten.version>1.2.7</flatten.version>
-		<mapstruct.version>1.4.2.Final</mapstruct.version>
 	</properties>
 
 	<build>
@@ -173,7 +172,6 @@
 								<compileSourceRoots>
 									<compileSourceRoot>${basedir}/src/main/java</compileSourceRoot>
 									<compileSourceRoot>${basedir}/target/generated-sources/openapi/src/main/java</compileSourceRoot>
-									<compileSourceRoot>${basedir}/target/generated-sources/kapt/compile</compileSourceRoot>
 								</compileSourceRoots>
 							</configuration>
 						</execution>
@@ -210,7 +208,6 @@
 									<sourceDir>${project.basedir}/target/generated-sources/openapi/src/main/java</sourceDir>
 									<sourceDir>${project.basedir}/target/generated-sources/rarible/src/main/kotlin</sourceDir>
 									<sourceDir>${project.basedir}/target/generated-sources/rarible/src/main/java</sourceDir>
-									<sourceDir>${project.basedir}/target/generated-sources/kaptKotlin/compile</sourceDir>
 								</sourceDirs>
 							</configuration>
 						</execution>
@@ -224,25 +221,6 @@
 									<sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
 									<sourceDir>${project.basedir}/src/test/java</sourceDir>
 								</sourceDirs>
-							</configuration>
-						</execution>
-						<execution>
-							<id>kapt</id>
-							<goals>
-								<goal>kapt</goal>
-							</goals>
-							<configuration>
-								<sourceDirs>
-									<sourceDir>src/main/kotlin</sourceDir>
-									<sourceDir>src/main/java</sourceDir>
-								</sourceDirs>
-								<annotationProcessorPaths>
-									<annotationProcessorPath>
-										<groupId>org.mapstruct</groupId>
-										<artifactId>mapstruct-processor</artifactId>
-										<version>${mapstruct.version}</version>
-									</annotationProcessorPath>
-								</annotationProcessorPaths>
 							</configuration>
 						</execution>
 					</executions>
@@ -381,6 +359,7 @@
 					<configuration>
 						<updatePomFile>true</updatePomFile>
 						<flattenMode>resolveCiFriendliesOnly</flattenMode>
+						<outputDirectory>${project.basedir}/target</outputDirectory>
 					</configuration>
 					<executions>
 						<execution>
@@ -409,11 +388,6 @@
 				<groupId>org.scala-lang</groupId>
 				<artifactId>scala-library</artifactId>
 				<version>${scala.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mapstruct</groupId>
-				<artifactId>mapstruct</artifactId>
-				<version>${mapstruct.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.mockk</groupId>
@@ -460,10 +434,6 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct</artifactId>
 		</dependency>
 	</dependencies>
 
