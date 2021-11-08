@@ -27,10 +27,6 @@
             <name>nexus-maven-public</name>
             <url>http://nexus-ext.rarible.int/repository/maven-public/</url>
 		</repository>
-		<repository>
-			<id>nexus-maven-public</id>
-			<url>http://10.7.3.6:8083/repository/maven-public/</url>
-		</repository>
 	</repositories>
     <pluginRepositories>
         <pluginRepository>
