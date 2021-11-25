@@ -54,7 +54,7 @@
         <mockk.version>1.10.6</mockk.version>
         <feign-reactor.version>2.0.31</feign-reactor.version>
         <mongock.version>4.3.8</mongock.version>
-        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+        <spring-cloud.version>2020.0.4</spring-cloud.version>
         <jacoco.version>0.8.7</jacoco.version>
         <flatten.version>1.2.7</flatten.version>
     </properties>
