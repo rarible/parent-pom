@@ -15,7 +15,7 @@ pipeline {
     }
     stage('deploy') {
       steps {
-      	deployToMaven('nexus-ci')
+      	deployToMaven('nexus-ext-ci')
       }
     }
   }
