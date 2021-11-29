@@ -8,7 +8,7 @@
 	<groupId>com.rarible</groupId>
 	<artifactId>rarible-parent-pom</artifactId>
 	<packaging>pom</packaging>
-	<version>2.0.2</version>
+	<version>2.0.3</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -388,12 +388,46 @@
                     <executions>
                         <execution>
                             <id>GenerateGitChangelog</id>
-                            <phase>generate-sources</phase>
+                            <phase>process-resources</phase>
                             <goals>
                                 <goal>git-changelog</goal>
                             </goals>
                             <configuration>
                                 <file>CHANGELOG.md</file>
+                                <templateContent>
+                                <![CDATA[
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+{{#tags}}
+{{#ifReleaseTag .}}
+## [{{name}}]({{repository}}/releases/tag/{{name}}) ({{tagDate}})
+
+  {{#ifContainsType commits type='feat'}}
+### Features
+
+    {{#commits}}
+      {{#ifCommitType . type='feat'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}]({{repository}}/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+
+  {{#ifContainsType commits type='fix'}}
+### Bug Fixes
+
+    {{#commits}}
+      {{#ifCommitType . type='fix'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}]({{repository}}/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+{{/ifReleaseTag}}
+{{/tags}}
+                                ]]>
+                                </templateContent>
                             </configuration>
                         </execution>
                     </executions>
