@@ -1,22 +1,3 @@
-@Library('shared-library') _
+@Library('shared-library@v21.11.30-1') _
 
-pipeline {
-  agent any
-
-	options {
-		disableConcurrentBuilds()
-	}
-
-  stages {
-    stage('install') {
-      steps {
-        sh 'mvn clean install'
-      }
-    }
-    stage('deploy') {
-      steps {
-      	deployToMaven('nexus-ext-ci')
-      }
-    }
-  }
-}
+buildLibrary(['credentialsId': 'nexus-ext-ci'])
