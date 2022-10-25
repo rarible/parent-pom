@@ -53,8 +53,8 @@
         <scalether.version>0.1.4</scalether.version>
         <mockk.version>1.10.6</mockk.version>
         <mongock.version>4.3.8</mongock.version>
-        <spring-cloud.version>2020.0.4</spring-cloud.version>
-        <jacoco.version>0.8.7</jacoco.version>
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <jacoco.version>0.8.8</jacoco.version>
         <flatten.version>1.2.7</flatten.version>
         <changelog.version>1.79</changelog.version>
     </properties>
